@@ -3444,6 +3444,261 @@ PARAM_DEFINE_INT32(PWM_MAX, 2000);
 PARAM_DEFINE_INT32(PWM_DISARMED, 900);
 
 /**
+ * Set the disarmed PWM for the main 1 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_MAIN1_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the main 2 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_MAIN2_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the main 3 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_MAIN3_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the main 4 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_MAIN4_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the main 5 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_MAIN5_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the main 6 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_MAIN6_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the main 7 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_MAIN7_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the main 8 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_MAIN8_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the AUX 1 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_AUX_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_AUX1_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the AUX 2 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_AUX_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_AUX2_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the AUX 3 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_AUX_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_AUX3_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the AUX 4 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_AUX_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_AUX4_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the AUX 5 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_AUX_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_AUX5_DIS, 0);
+
+/**
+ * Set the disarmed PWM for the AUX 6 output
+ *
+ * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
+ * REBOOT IN ORDER TO APPLY THE CHANGES.
+ *
+ * This is the PWM pulse the autopilot is outputting if not armed.
+ * When set to 0 the value for PWM_AUX_DISARMED will be used
+ *
+ * @reboot_required true
+ *
+ * @min 0
+ * @max 2200
+ * @unit us
+ * @group PWM Outputs
+ */
+PARAM_DEFINE_INT32(PWM_AUX6_DIS, 0);
+
+
+
+
+/**
  * Set the minimum PWM for the auxiliary outputs
  *
  * IMPORTANT: CHANGING THIS PARAMETER REQUIRES A COMPLETE SYSTEM
