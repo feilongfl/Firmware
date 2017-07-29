@@ -104,44 +104,44 @@ then
 		#
 		# Per channel disarmed settings
 		#
-		if param greater PWM_MAIN1_DIS 0
+		if param greater PWM_MAIN_DIS1 0
 		then
-			pwm disarmed -c 1 -p p:PWM_MAIN1_DIS
+			pwm disarmed -c 1 -p p:PWM_MAIN_DIS1
 		fi
 
-		if param greater PWM_MAIN2_DIS 0
+		if param greater PWM_MAIN_DIS2 0
 		then
-			pwm disarmed -c 2 -p p:PWM_MAIN2_DIS
+			pwm disarmed -c 2 -p p:PWM_MAIN_DIS2
 		fi
 
-		if param greater PWM_MAIN3_DIS 0
+		if param greater PWM_MAIN_DIS3 0
 		then
-			pwm disarmed -c 3 -p p:PWM_MAIN3_DIS
+			pwm disarmed -c 3 -p p:PWM_MAIN_DIS3
 		fi
 
-		if param greater PWM_MAIN4_DIS 0
+		if param greater PWM_MAIN_DIS4 0
 		then
-			pwm disarmed -c 4 -p p:PWM_MAIN4_DIS
+			pwm disarmed -c 4 -p p:PWM_MAIN_DIS4
 		fi
 
-		if param greater PWM_MAIN5_DIS 0
+		if param greater PWM_MAIN_DIS5 0
 		then
-			pwm disarmed -c 5 -p p:PWM_MAIN5_DIS
+			pwm disarmed -c 5 -p p:PWM_MAIN_DIS5
 		fi
 
-		if param greater PWM_MAIN6_DIS 0
+		if param greater PWM_MAIN_DIS6 0
 		then
-			pwm disarmed -c 6 -p p:PWM_MAIN6_DIS
+			pwm disarmed -c 6 -p p:PWM_MAIN_DIS6
 		fi
 
-		if param greater PWM_MAIN7_DIS 0
+		if param greater PWM_MAIN_DIS7 0
 		then
-			pwm disarmed -c 7 -p p:PWM_MAIN7_DIS
+			pwm disarmed -c 7 -p p:PWM_MAIN_DIS7
 		fi
 
-		if param greater PWM_MAIN8_DIS 0
+		if param greater PWM_MAIN_DIS8 0
 		then
-			pwm disarmed -c 8 -p p:PWM_MAIN8_DIS
+			pwm disarmed -c 8 -p p:PWM_MAIN_DIS8
 		fi
 
 	fi
@@ -275,34 +275,34 @@ then
 		#
 		# Per channel disarmed settings
 		#
-		if param greater PWM_AUX1_DIS 0
+		if param greater PWM_AUX_DIS1 0
 		then
-			pwm disarmed -c 1 -p p:PWM_AUX1_DIS -d ${OUTPUT_AUX_DEV}
+			pwm disarmed -c 1 -p p:PWM_AUX_DIS1 -d ${OUTPUT_AUX_DEV}
 		fi
 
-		if param greater PWM_AUX2_DIS 0
+		if param greater PWM_AUX_DIS2 0
 		then
-			pwm disarmed -c 2 -p p:PWM_AUX2_DIS -d ${OUTPUT_AUX_DEV}
+			pwm disarmed -c 2 -p p:PWM_AUX_DIS2 -d ${OUTPUT_AUX_DEV}
 		fi
 
-		if param greater PWM_AUX3_DIS 0
+		if param greater PWM_AUX_DIS3 0
 		then
-			pwm disarmed -c 3 -p p:PWM_AUX3_DIS -d ${OUTPUT_AUX_DEV}
+			pwm disarmed -c 3 -p p:PWM_AUX_DIS3 -d ${OUTPUT_AUX_DEV}
 		fi
 
-		if param greater PWM_AUX4_DIS 0
+		if param greater PWM_AUX_DIS4 0
 		then
-			pwm disarmed -c 4 -p p:PWM_AUX4_DIS -d ${OUTPUT_AUX_DEV}
+			pwm disarmed -c 4 -p p:PWM_AUX_DIS4 -d ${OUTPUT_AUX_DEV}
 		fi
 
-		if param greater PWM_AUX5_DIS 0
+		if param greater PWM_AUX_DIS5 0
 		then
-			pwm disarmed -c 5 -p p:PWM_AUX5_DIS -d ${OUTPUT_AUX_DEV}
+			pwm disarmed -c 5 -p p:PWM_AUX_DIS5 -d ${OUTPUT_AUX_DEV}
 		fi
 
-		if param greater PWM_AUX6_DIS 0
+		if param greater PWM_AUX_DIS6 0
 		then
-			pwm disarmed -c 6 -p p:PWM_AUX6_DIS -d ${OUTPUT_AUX_DEV}
+			pwm disarmed -c 6 -p p:PWM_AUX_DIS6 -d ${OUTPUT_AUX_DEV}
 		fi
 
 
