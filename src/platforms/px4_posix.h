@@ -55,11 +55,10 @@
 
 #include "px4_sem.h"
 
-
 #ifdef __PX4_NUTTX
 
-#define  PX4_F_RDONLY 1
-#define  PX4_F_WRONLY 2
+#define PX4_F_RDONLY 1
+#define PX4_F_WRONLY 2
 
 typedef struct pollfd px4_pollfd_struct_t;
 
@@ -68,60 +67,59 @@ typedef struct pollfd px4_pollfd_struct_t;
 #else
 #define _GLOBAL
 #endif
-#define px4_open 	_GLOBAL open
-#define px4_close 	_GLOBAL close
-#define px4_ioctl 	_GLOBAL ioctl
-#define px4_write 	_GLOBAL write
-#define px4_read 	_GLOBAL read
-#define px4_poll 	_GLOBAL poll
-#define px4_fsync 	_GLOBAL fsync
-#define px4_access 	_GLOBAL access
-#define px4_getpid 	_GLOBAL getpid
+#define px4_open _GLOBAL   open
+#define px4_close _GLOBAL  close
+#define px4_ioctl _GLOBAL  ioctl
+#define px4_write _GLOBAL  write
+#define px4_read _GLOBAL   read
+#define px4_poll _GLOBAL   poll
+#define px4_fsync _GLOBAL  fsync
+#define px4_access _GLOBAL access
+#define px4_getpid _GLOBAL getpid
 
-#define  PX4_STACK_OVERHEAD	0
+#define PX4_STACK_OVERHEAD 0
 
 #elif defined(__PX4_POSIX)
 
-#define  PX4_F_RDONLY O_RDONLY
-#define  PX4_F_WRONLY O_WRONLY
-#define  PX4_F_CREAT  O_CREAT
-#define	 PX4_STACK_OVERHEAD	8192
+#define PX4_F_RDONLY O_RDONLY
+#define PX4_F_WRONLY O_WRONLY
+#define PX4_F_CREAT O_CREAT
+#define PX4_STACK_OVERHEAD 8192
 
 __BEGIN_DECLS
 
 typedef short pollevent_t;
 
 typedef struct {
-	/* This part of the struct is POSIX-like */
-	int		fd;       /* The descriptor being polled */
-	pollevent_t 	events;   /* The input event flags */
-	pollevent_t 	revents;  /* The output event flags */
+    /* This part of the struct is POSIX-like */
+    int         fd; /* The descriptor being polled */
+    pollevent_t events; /* The input event flags */
+    pollevent_t revents; /* The output event flags */
 
-	/* Required for PX4 compatibility */
-	px4_sem_t   *sem;  	/* Pointer to semaphore used to post output event */
-	void   *priv;     	/* For use by drivers */
+    /* Required for PX4 compatibility */
+    px4_sem_t* sem; /* Pointer to semaphore used to post output event */
+    void*      priv; /* For use by drivers */
 } px4_pollfd_struct_t;
 
-__EXPORT int 		px4_open(const char *path, int flags, ...);
-__EXPORT int 		px4_close(int fd);
-__EXPORT ssize_t	px4_read(int fd, void *buffer, size_t buflen);
-__EXPORT ssize_t	px4_write(int fd, const void *buffer, size_t buflen);
-__EXPORT int		px4_ioctl(int fd, int cmd, unsigned long arg);
-__EXPORT int		px4_poll(px4_pollfd_struct_t *fds, nfds_t nfds, int timeout);
-__EXPORT int		px4_fsync(int fd);
-__EXPORT int		px4_access(const char *pathname, int mode);
-__EXPORT px4_task_t	px4_getpid(void);
+__EXPORT int px4_open(const char* path, int flags, ...);
+__EXPORT int px4_close(int fd);
+__EXPORT ssize_t px4_read(int fd, void* buffer, size_t buflen);
+__EXPORT ssize_t px4_write(int fd, const void* buffer, size_t buflen);
+__EXPORT int px4_ioctl(int fd, int cmd, unsigned long arg);
+__EXPORT int px4_poll(px4_pollfd_struct_t* fds, nfds_t nfds, int timeout);
+__EXPORT int px4_fsync(int fd);
+__EXPORT int px4_access(const char* pathname, int mode);
+__EXPORT px4_task_t px4_getpid(void);
 
-__EXPORT void		px4_enable_sim_lockstep(void);
-__EXPORT void		px4_sim_start_delay(void);
-__EXPORT void		px4_sim_stop_delay(void);
-__EXPORT bool		px4_sim_delay_enabled(void);
+__EXPORT void px4_enable_sim_lockstep(void);
+__EXPORT void px4_sim_start_delay(void);
+__EXPORT void px4_sim_stop_delay(void);
+__EXPORT bool px4_sim_delay_enabled(void);
 
 __END_DECLS
 #else
 #error "No TARGET OS Provided"
 #endif
-
 
 // The stack size is intended for 32-bit architectures; therefore
 // we often run out of stack space when pointers are larger than 4 bytes.
@@ -132,21 +130,20 @@ __END_DECLS
 __BEGIN_DECLS
 extern int px4_errno;
 
-__EXPORT void		px4_show_devices(void);
-__EXPORT void		px4_show_files(void);
-__EXPORT const char 	*px4_get_device_names(unsigned int *handle);
+__EXPORT void        px4_show_devices(void);
+__EXPORT void        px4_show_files(void);
+__EXPORT const char* px4_get_device_names(unsigned int* handle);
 
-__EXPORT void		px4_show_topics(void);
-__EXPORT const char 	*px4_get_topic_names(unsigned int *handle);
+__EXPORT void        px4_show_topics(void);
+__EXPORT const char* px4_get_topic_names(unsigned int* handle);
 
 #ifndef __PX4_QURT
 /*
  * The UNIX epoch system time following the system clock
  */
-__EXPORT uint64_t	hrt_system_time(void);
+__EXPORT uint64_t hrt_system_time(void);
 
-__EXPORT bool		px4_exit_requested(void);
-
+__EXPORT bool px4_exit_requested(void);
 
 #endif
 

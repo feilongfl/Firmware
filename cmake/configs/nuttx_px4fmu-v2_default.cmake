@@ -101,6 +101,8 @@ set(config_module_list
 	#modules/uavcan
 	modules/land_detector
 	modules/camera_feedback
+	#feilong
+	#modules/colorled
 
 	#
 	# Estimation modules
@@ -135,6 +137,11 @@ set(config_module_list
 	modules/systemlib/mixer
 	modules/uORB
 	modules/dataman
+
+	#
+	# FeiLong modules
+	# 
+	modules/OF_Led
 
 	#
 	# Libraries
