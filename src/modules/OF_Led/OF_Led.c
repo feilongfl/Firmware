@@ -52,7 +52,7 @@
 
 #include <poll.h>
 #include <uORB/topics/optical_flow.h>
-#include "drivers/drv_pwm_output.h"
+#include <uORB/topics/output_pwm.h>
 
 static bool thread_should_exit = false; /**< daemon exit flag */
 static bool thread_running     = false; /**< daemon status flag */
@@ -156,28 +156,9 @@ int OF_Led_thread_main(int argc, char* argv[])
     int error_counter = 0;
     //pre pwm
     // const char* dev  = PWM_OUTPUT0_DEVICE_PATH;
-    const char* dev = PWM_OUTPUT1_DEVICE_PATH;
-    int         fd  = px4_open(dev, 0);
-    int         ret = 0;
-
-    if (fd < 0) {
-        PX4_ERR("can't open %s", dev);
-        return 1;
-    }
-
-    unsigned servo_count;
-    ret = px4_ioctl(fd, PWM_SERVO_GET_COUNT, (unsigned long)&servo_count);
-
-    if (ret != OK) {
-        PX4_ERR("PWM_SERVO_GET_COUNT");
-        return 1;
-    } else {
-        warnx("PWM_SERVO_GET_COUNT => %d\n", servo_count);
-    }
-
-    // struct pollfd pwm_fds;
-    // pwm_fds.fd     = 0; /* stdin */
-    // pwm_fds.events = POLLIN;
+    struct output_pwm_s pwm;
+    memset(&pwm, 0, sizeof(pwm));
+    orb_advert_t pwm_pub = orb_advertise(ORB_ID(output_pwm), &pwm);
     /********/
 
     while (!thread_should_exit) {
@@ -208,29 +189,15 @@ int OF_Led_thread_main(int argc, char* argv[])
                 /* copy sensors raw data into local buffer */
                 orb_copy(ORB_ID(optical_flow), of_sub_fd, &raw);
                 // printf("[OF_Led] qulity:\t%d\n",raw.quality);
+
+                pwm.values[5]     = 1200;
+                pwm.channel_count = 5;
+                orb_publish(ORB_ID(output_pwm), pwm_pub, &pwm);
             }
         }
 
         /*****************************/
         //pwm out
-        int i         = 1;
-        int pwm_value = 1200;
-        ret           = px4_ioctl(fd, PWM_SERVO_SET(i), pwm_value);
-
-        if (ret != OK) {
-            PX4_ERR("PWM_SERVO_SET(%d)", i);
-            return 1;
-        }
-
-        usleep(2542);
-
-#ifdef __PX4_NUTTX
-/* Trigger all timer's channels in Oneshot mode to fire
-        			 * the oneshots with updated values.
-        			 */
-
-// up_pwm_update();
-#endif
 
         /***************************/
         sleep(0.1);
