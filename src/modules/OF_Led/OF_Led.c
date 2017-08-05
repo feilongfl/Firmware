@@ -51,7 +51,8 @@
 #include <systemlib/err.h>
 
 #include <poll.h>
-#include <uORB/topics/sensor_combined.h>
+#include <uORB/topics/optical_flow.h>
+#include "drivers/drv_pwm_output.h"
 
 static bool thread_should_exit = false; /**< daemon exit flag */
 static bool thread_running     = false; /**< daemon status flag */
@@ -146,31 +147,56 @@ int OF_Led_thread_main(int argc, char* argv[])
     /********/
     //running
 
-    int sensor_sub_fd = orb_subscribe(ORB_ID(sensor_combined));
+    int of_sub_fd = orb_subscribe(ORB_ID(optical_flow));
 
     /* one could wait for multiple topics with this technique, just using one here */
     px4_pollfd_struct_t fds[] = {
-        {.fd = sensor_sub_fd, .events = POLLIN },
+        {.fd = of_sub_fd, .events = POLLIN },
     };
     int error_counter = 0;
+    //pre pwm
+    // const char* dev  = PWM_OUTPUT0_DEVICE_PATH;
+    const char* dev = PWM_OUTPUT1_DEVICE_PATH;
+    int         fd  = px4_open(dev, 0);
+    int         ret = 0;
+
+    if (fd < 0) {
+        PX4_ERR("can't open %s", dev);
+        return 1;
+    }
+
+    unsigned servo_count;
+    ret = px4_ioctl(fd, PWM_SERVO_GET_COUNT, (unsigned long)&servo_count);
+
+    if (ret != OK) {
+        PX4_ERR("PWM_SERVO_GET_COUNT");
+        return 1;
+    } else {
+        warnx("PWM_SERVO_GET_COUNT => %d\n", servo_count);
+    }
+
+    // struct pollfd pwm_fds;
+    // pwm_fds.fd     = 0; /* stdin */
+    // pwm_fds.events = POLLIN;
     /********/
 
     while (!thread_should_exit) {
-        warnx("Hello daemon!\n");
+        //warnx("Hello daemon!\n");
 
         /***************************/
         //loop
+        //of read
         int poll_ret = px4_poll(fds, 1, 1000);
 
         if (poll_ret == 0) {
             /* this means none of our providers is giving us data */
-            PX4_ERR("[px4_simple_app] Got no data within a second");
+            PX4_ERR("[OF_Led] Got no data within a second");
 
         } else if (poll_ret < 0) {
             /* this is seriously bad - should be an emergency */
             if (error_counter < 10 || error_counter % 50 == 0) {
                 /* use a counter to prevent flooding (and slowing us down) */
-                PX4_ERR("[px4_simple_app] ERROR return value from poll(): %d", poll_ret);
+                PX4_ERR("[OF_Led] ERROR return value from poll(): %d", poll_ret);
             }
 
             error_counter++;
@@ -178,15 +204,33 @@ int OF_Led_thread_main(int argc, char* argv[])
         } else {
             if (fds[0].revents & POLLIN) {
                 /* obtained data for the first file descriptor */
-                struct sensor_combined_s raw;
+                struct optical_flow_s raw;
                 /* copy sensors raw data into local buffer */
-                orb_copy(ORB_ID(sensor_combined), sensor_sub_fd, &raw);
-                printf("[OF_Led] Accelerometer:\t%8.4f\t%8.4f\t%8.4f\n",
-                    (double)raw.accelerometer_m_s2[0],
-                    (double)raw.accelerometer_m_s2[1],
-                    (double)raw.accelerometer_m_s2[2]);
+                orb_copy(ORB_ID(optical_flow), of_sub_fd, &raw);
+                // printf("[OF_Led] qulity:\t%d\n",raw.quality);
             }
         }
+
+        /*****************************/
+        //pwm out
+        int i         = 1;
+        int pwm_value = 1200;
+        ret           = px4_ioctl(fd, PWM_SERVO_SET(i), pwm_value);
+
+        if (ret != OK) {
+            PX4_ERR("PWM_SERVO_SET(%d)", i);
+            return 1;
+        }
+
+        usleep(2542);
+
+#ifdef __PX4_NUTTX
+/* Trigger all timer's channels in Oneshot mode to fire
+        			 * the oneshots with updated values.
+        			 */
+
+// up_pwm_update();
+#endif
 
         /***************************/
         sleep(0.1);

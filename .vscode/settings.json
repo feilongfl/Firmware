@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "condition_variable": "c"
+        "condition_variable": "c",
+        "system_error": "cpp",
+        "type_traits": "cpp",
+        "*.tcc": "c",
+        "fstream": "c"
     }
 }
